@@ -1,0 +1,12 @@
+5
+5
+3
+3
+ababc
+abcba
+cbabc
+abcba
+ababc
+abc
+cba
+abc
