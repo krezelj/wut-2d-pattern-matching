@@ -17,7 +17,8 @@ def build_kmp_table(P: list[str]) -> list[int]:
     for row in P:
         p.append(T.insert_key(row))
 
-    t = [0] * n1
+    t = [1] * n1
+    t[0] = 0
     l = 0
     j = 2
     while j <= n1:
@@ -28,7 +29,7 @@ def build_kmp_table(P: list[str]) -> list[int]:
         elif l != 0:
             l = t[l - 1]
         else:
-            t[j - 1] = 0
+            t[j - 1] = 1
             j = j + 1
     return t
 
