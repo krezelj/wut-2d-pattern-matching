@@ -54,7 +54,7 @@ def search(M: list[str], P: list[str]):
             state = automaton.go(state, char)
             if state.terminal:
                 k = a[j]
-                while state.key != P[k - 1] and k != 0:
+                while k > 0 and state.key != P[k - 1]:
                     k = t[k - 1]
 
                 if k == n1:
