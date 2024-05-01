@@ -19,17 +19,18 @@ def build_kmp_table(P: list[str]) -> list[int]:
 
     t = [0] * n1
     l = 0
-    j = 1
-    while j < n1:
-        if p[j] == p[l]:
+    i = 1
+    while i < n1:
+        if p[i] == p[l]:
             l += 1
-            t[j] = l
-            j += 1
-        elif l != 0:
-            l = t[l - 1]
+            t[i] = l
+            i += 1
         else:
-            t[j] = 0
-            j += 1
+            if l != 0:
+                l = t[l - 1]
+            else:
+                t[i] = 0
+                i += 1
     return t
 
 
@@ -41,7 +42,7 @@ def search(M: list[str], P: list[str]):
 
     automaton = build_automaton(P)
     t = build_kmp_table(P)
-    a = [1] * m2
+    a = [0] * m2
     S = []
 
     for i in range(m1):
@@ -51,18 +52,17 @@ def search(M: list[str], P: list[str]):
             while automaton.go(state, char) is None and state is not automaton.root:
                 state = automaton.fail(state)
             state = automaton.go(state, char)
+
             if state.terminal:
                 k = a[j]
-                while k > 0 and state.key != P[k - 1]:
-                    k = t[k - 1]
-
-                if k == n1:
-                    k = t[k - 1]
-                    S.append((j + 1, i + 1)) # output should assume indices start at 1
-                a[j] = k + 1
-                    
+                if state.key == P[k]:
+                    k += 1
+                    if k == n1:
+                        k = t[k - 1]
+                        S.append((j + 1, i + 1))
+                    a[j] = k
             else:
-                a[j] = 1
+                a[j] = 0
     return S
 
 
