@@ -17,20 +17,19 @@ def build_kmp_table(P: list[str]) -> list[int]:
     for row in P:
         p.append(T.insert_key(row))
 
-    t = [1] * n1
-    t[0] = 0
+    t = [0] * n1
     l = 0
-    j = 2
-    while j <= n1:
-        if p[j - 1] == p[l]:
-            l = l + 1
-            t[j - 1] = l
-            j = j + 1
+    j = 1
+    while j < n1:
+        if p[j] == p[l]:
+            l += 1
+            t[j] = l
+            j += 1
         elif l != 0:
             l = t[l - 1]
         else:
-            t[j - 1] = 1
-            j = j + 1
+            t[j] = 0
+            j += 1
     return t
 
 
