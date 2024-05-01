@@ -32,16 +32,16 @@ def validate_result(result, p):
 def run_benchmark():
     m1_space = np.arange(200, 199, -100)
     m2_space = np.arange(200, 199, -100)
-    n1_space = np.arange(3, 1, -1)
-    n2_space = np.arange(3, 1, -1)
-    # n_runs = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    n1_space = np.arange(30, 4, -5)
+    n2_space = np.arange(30, 4, -5)
+    n_runs = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
     df = pd.DataFrame(columns=["m1", "m2", "n1", "n2", "m1m2", "n1n2", "conf_id", "t"])
     np.random.seed(0)
  
 
     for id, (m1, m2, n1, n2) in tqdm(enumerate(product(m1_space, m2_space, n1_space, n2_space))):
         lam = 1 + (m1 * m2) // (n1 * n2 * 10)
-        n = 100 # n_runs[int(np.sqrt(m1 * m2)) // 100]
+        n = n_runs[int(np.sqrt(m1 * m2)) // 100]
         for _ in tqdm(range(n), leave=False):
             k = 1 + np.random.poisson(lam)
             M, P, p, k = generate_example(m1, m2, n1, n2, k)
