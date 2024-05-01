@@ -15,7 +15,7 @@ def convert_to_chars(A):
 def generate_example(m1, m2, n1, n2, target_k):
     M = np.random.randint(0, 25, size=(m1, m2))
     P = np.random.randint(0, 25, size=(n1, n2))
-    P[np.random.randint(n1), np.random.randint(n1)] = 25
+    P[np.random.randint(n1), np.random.randint(n2)] = 25
     available = np.full(shape=(m1, m2), fill_value=True)
     if n1 > 1:
         available[1 - n1:,:] = False
