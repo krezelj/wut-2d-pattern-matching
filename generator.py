@@ -38,12 +38,12 @@ def generate_example(m1, m2, n1, n2, target_k):
             target_k = k
             break
         
-        positions.append((j + n2, i + n1))
+        positions.append((i + 1, j + 1))
         M[i:i+n1, j:j+n2] = P
         available[max(0, i-n1):i+n1, max(0, j-n2):j+n2]=False
 
     M = convert_to_chars(M)
     P = convert_to_chars(P)
-    positions.sort(key = lambda p : (p[1], p[0]))
+    positions.sort(key = lambda p : (p[0], p[1]))
     return M, P, positions, target_k
 

@@ -59,7 +59,7 @@ def search(M: list[str], P: list[str]):
                     k += 1
                     if k == n1:
                         k = t[k - 1]
-                        S.append((j + 1, i + 1))
+                        S.append((i + 2 - n1, j + 2 - n2))
                     a[j] = k
             else:
                 a[j] = 0
