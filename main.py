@@ -33,10 +33,13 @@ def get_new():
 
 
 def save_result(M, P, result):
-    path = input('path to result: ')
-    with open(path, 'w') as f:
-        for x, y in result:
-            f.write(f"{x} {y}\n")
+    path = input('path to result (leave blank to print): ')
+    if path == "":
+        print(result)
+    else:
+        with open(path, 'w') as f:
+            for x, y in result:
+                f.write(f"{x} {y}\n")
     path = input('path to generated example (leave blank to skip): ')
     if path == "":
         return
