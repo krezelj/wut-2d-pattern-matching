@@ -25,15 +25,28 @@ def get_new():
     m2 = int(input("m2: "))
     n1 = int(input("n1: "))
     n2 = int(input("n2: "))
-    target_k = int(input("target k: "))
+    target_k = int(input("target pattern instances (k): "))
     M, P, _, k = generate_example(m1, m2, n1, n2, target_k)
     if k != target_k:
         print(f"the generator stopped before reaching target k, {k} patterns inserted instead")
     return M, P
 
 
-# def save_result(result):
-#     path
+def save_result(M, P, result):
+    path = input('path to result: ')
+    with open(path, 'w') as f:
+        for x, y in result:
+            f.write(f"{x} {y}\n")
+    path = input('path to generated example (leave blank to skip): ')
+    if path == "":
+        return
+    with open(path, 'w') as f:
+        f.write(f"{len(M)}\n")
+        f.write(f"{len(M[0])}\n")
+        f.write(f"{len(P)}\n")
+        f.write(f"{len(P[0])}\n")
+        f.writelines('\n'.join(M) + '\n')
+        f.writelines('\n'.join(P))
 
 
 def main():
@@ -48,7 +61,8 @@ def main():
     result = search(M, P)
     duration = time.time_ns() - start
     print(f"done! {duration/1e9}s")
-
+    save_result(M, P, result)
+    
 
 if __name__ =="__main__":
     main()
